@@ -8,6 +8,7 @@ mapboxgl.accessToken =
 function Map({ filteredData, isLoading }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // Get minZoom based on screen size
   const getMinZoom = () => {
@@ -30,7 +31,7 @@ function Map({ filteredData, isLoading }) {
       style: "mapbox://styles/mapbox/streets-v11",
       center: [-97, 38],
       zoom: 4,
-      minZoom: 2.5,
+      minZoom: getMinZoom(),
     });
 
     // disable map rotation using right click + drag
