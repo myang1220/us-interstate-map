@@ -93,7 +93,7 @@ function App() {
   }, []);
 
   // filter function based off of criteria
-  const filterMap = (interstate_num, even, odd, major) => {
+  const filterMap = (interstate_nums, even, odd, major) => {
     if (!geojsonData) return;
 
     let filtered = {
@@ -157,9 +157,9 @@ function App() {
 
     // general filter if interstate_num provided
     // TODO: modify this to include the functionality for multiple highways (like using the skills card with x)
-    if (interstate_num) {
-      filtered.features = filtered.features.filter(
-        (feature) => feature.properties.BASENAME === interstate_num
+    if (interstate_nums && interstate_nums.length > 0) {
+      filtered.features = filtered.features.filter((feature) =>
+        interstate_nums.includes(feature.properties.BASENAME)
       );
     }
     setFilteredData(filtered);

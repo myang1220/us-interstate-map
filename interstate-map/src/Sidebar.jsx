@@ -1,6 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import Dropdown from "./Dropdown";
+import Card from "./Card";
 
 function Sidebar({ onFilter }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -8,6 +9,7 @@ function Sidebar({ onFilter }) {
   const [even, setEven] = useState(true);
   const [odd, setOdd] = useState(true);
   const [major, setMajor] = useState(false);
+  const [nums, setNums] = useState([]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -18,7 +20,7 @@ function Sidebar({ onFilter }) {
   };
 
   const applyFilter = () => {
-    onFilter(filterValue, even, odd, major);
+    onFilter(nums, even, odd, major);
   };
 
   const handleKeyDown = (event) => {
@@ -39,19 +41,31 @@ function Sidebar({ onFilter }) {
   const handleEvenToggle = (e) => {
     const newEven = !even;
     setEven(newEven);
-    onFilter(filterValue, newEven, odd, major);
+    onFilter(nums, newEven, odd, major);
   };
 
   const handleOddToggle = (e) => {
     const newOdd = !odd;
     setOdd(newOdd);
-    onFilter(filterValue, even, newOdd, major);
+    onFilter(nums, even, newOdd, major);
   };
 
   const handleMajorToggle = (e) => {
     const newMajor = !major;
     setMajor(newMajor);
-    onFilter(filterValue, even, odd, newMajor);
+    onFilter(nums, even, odd, newMajor);
+  };
+
+  const addNum = (e) => {
+    if (filterValue.trim() !== "") {
+      setNums([...nums, filterValue]);
+    }
+    applyFilter();
+  };
+
+  const removeNum = (numToRemove) => {
+    setNums(nums.filter((num) => num !== numToRemove));
+    applyFilter();
   };
 
   return (
@@ -146,6 +160,7 @@ function Sidebar({ onFilter }) {
                 </button>
               </div>
             </div>
+            <Card></Card>
             <label className="inline-flex items-center cursor-pointer gap-3">
               <input
                 type="checkbox"
