@@ -43,7 +43,7 @@ function Map({ filteredData, isLoading }) {
     mapRef.current = map;
 
     return () => map.remove();
-  }, []);
+  }, [windowWidth]);
 
   // Add or update GeoJSON source/layer when data changes
   useEffect(() => {
