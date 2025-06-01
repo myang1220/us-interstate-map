@@ -9,6 +9,18 @@ function Map({ filteredData, isLoading }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
 
+  // Get minZoom based on screen size
+  const getMinZoom = () => {
+    return windowWidth < 768 ? 2.5 : 3.8;
+  };
+
+  // Track window resize
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Initialize map
   useEffect(() => {
     if (!containerRef.current) return;
@@ -18,7 +30,7 @@ function Map({ filteredData, isLoading }) {
       style: "mapbox://styles/mapbox/streets-v11",
       center: [-97, 38],
       zoom: 4,
-      minZoom: 3.8,
+      minZoom: 2.5,
     });
 
     // disable map rotation using right click + drag
