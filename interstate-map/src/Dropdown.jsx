@@ -206,6 +206,7 @@ function Dropdown({ dropdown_num }) {
                 The tech stack used includes HTML/CSS, JS, React, and
                 TailwindCSS.
               </li>
+              <li>This project was created by Moses Yang!</li>
             </ul>
           </div>
         </div>
