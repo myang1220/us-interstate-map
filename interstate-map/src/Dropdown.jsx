@@ -13,7 +13,7 @@ function Dropdown({ dropdown_num }) {
         return (
           <div className="w-6 h-6">
             <img
-              src="/interstate.svg"
+              src="/us-interstate-map/interstate.svg"
               alt="Interstate Shield"
               className="h-6 w-6"
             />

@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/filtered_1.geojson");
+        const response = await fetch("/us-interstate-map/filtered_1.geojson");
         const data = await response.json();
 
         // set color
