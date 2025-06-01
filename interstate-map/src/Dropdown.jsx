@@ -7,6 +7,78 @@ function Dropdown({ dropdown_num }) {
     setDropdown(!dropdown);
   };
 
+  const getIcon = () => {
+    switch (dropdown_num) {
+      case 1:
+        return (
+          <div className="w-6 h-6">
+            <img
+              src="/interstate.svg"
+              alt="Interstate Shield"
+              className="h-6 w-6"
+            />
+          </div>
+        );
+      case 2:
+        return (
+          <div className="w-6 h-6">
+            {" "}
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="12" cy="12" r="10" strokeWidth="1.5" />
+              <line
+                x1="12"
+                y1="16"
+                x2="12"
+                y2="12"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+              <line
+                x1="12"
+                y1="8"
+                x2="12"
+                y2="8.01"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+        );
+      case 3:
+        return (
+          <div className="w-6 h-6">
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="2"
+                y="3"
+                width="20"
+                height="14"
+                rx="1"
+                strokeWidth="1.5"
+              />
+              <rect x="4" y="5" width="16" height="10" strokeWidth="0.75" />
+              <path d="M8 21h8" strokeWidth="1.5" strokeLinecap="round" />
+              <path d="M12 17v4" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </div>
+        );
+      default:
+        return;
+    }
+  };
+
   const getTitle = () => {
     switch (dropdown_num) {
       case 1:
@@ -21,15 +93,17 @@ function Dropdown({ dropdown_num }) {
   };
 
   return (
-    <div className="w-full sm:text-sm text-xs font-medium text-gray-300 dark:text-gray-300">
-      <div className="w-full flex flex-row p-2 items-center">
-        <div className="w-full flex sm:text-lg text-base font-bold text-gray-100">
+    <div
+      onClick={toggleDropdown}
+      className="cursor-pointer w-full sm:text-sm text-xs font-medium text-gray-300 hover:text-white"
+    >
+      <div className="w-full flex flex-row py-2 items-center">
+        {/*Insert SVG Icon here */}
+        <div className="p-2 mr-2 rounded bg-gray-700/90">{getIcon()}</div>
+        <div className="w-full flex sm:text-lg text-base font-bold">
           {getTitle()}
         </div>
-        <button
-          onClick={toggleDropdown}
-          className="focus:outline-none h-full flex-grow justify-end"
-        >
+        <button className="focus:outline-none h-full flex-grow justify-end">
           <svg
             className={`h-6 w-6 transition-transform duration-300 ${
               dropdown ? "rotate-90" : ""
@@ -55,7 +129,7 @@ function Dropdown({ dropdown_num }) {
             dropdown ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="sm:text-sm text-xs font-medium text-gray-300 bg-gray-900/70 p-4 rounded">
+          <div className="sm:text-sm text-xs font-medium text-gray-300 bg-gray-700/90 p-4 rounded">
             Though there are numerous exceptions, the US Interstate Highway
             System follows the following rules:
             <ul className="list-disc pl-6 mt-2">
@@ -97,12 +171,12 @@ function Dropdown({ dropdown_num }) {
             dropdown ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="sm:text-sm text-xs font-medium text-gray-300 bg-gray-900/70 p-4 rounded">
+          <div className="sm:text-sm text-xs font-medium text-gray-300 bg-gray-700/90 p-4 rounded">
             This website was created to help teach the intricacies of the US
             Interstate Numbering System. While many often know about the vague
-            existence of a method to the madness, it can be difficult to
-            immediately and intuitively understand the web of highways that
-            connect US residents across the country. <br />
+            existence of explanation behind the numbering of interstates, it can
+            be difficult to immediately and intuitively understand the web of
+            highways that connect US residents across the country. <br />
             <br /> This website offers an opportunity to both explore the system
             interactively and develop an appreciation for the scale of labor
             required to build such a system. The filtration system is intended
@@ -118,7 +192,7 @@ function Dropdown({ dropdown_num }) {
             dropdown ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="sm:text-sm text-xs font-medium text-gray-300 bg-gray-900/70 p-4 rounded">
+          <div className="sm:text-sm text-xs font-medium text-gray-300 bg-gray-700/90 p-4 rounded">
             <ul className="list-disc pl-6 mt-2">
               <li>
                 This project was inspired by a similar project by Curt Arledge.

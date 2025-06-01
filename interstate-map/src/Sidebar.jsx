@@ -19,14 +19,10 @@ function Sidebar({ onFilter }) {
     setFilterValue(e.target.value);
   };
 
-  const applyFilter = () => {
-    onFilter(nums, even, odd, major);
-  };
-
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      applyFilter();
+      addNum();
     }
   };
 
@@ -35,7 +31,8 @@ function Sidebar({ onFilter }) {
     setEven(true);
     setOdd(true);
     setMajor(false);
-    onFilter("", true, true, false);
+    setNums([]);
+    onFilter([], true, true, false);
   };
 
   const handleEvenToggle = (e) => {
@@ -57,15 +54,18 @@ function Sidebar({ onFilter }) {
   };
 
   const addNum = (e) => {
-    if (filterValue.trim() !== "") {
-      setNums([...nums, filterValue]);
+    if (filterValue.trim() !== "" && !nums.includes(filterValue)) {
+      setFilterValue("");
+      const newNums = [...nums, filterValue];
+      setNums(newNums);
+      onFilter(newNums, even, odd, major);
     }
-    applyFilter();
   };
 
   const removeNum = (numToRemove) => {
-    setNums(nums.filter((num) => num !== numToRemove));
-    applyFilter();
+    const newNums = nums.filter((num) => num !== numToRemove);
+    setNums(newNums);
+    onFilter(newNums, even, odd, major);
   };
 
   return (
@@ -78,7 +78,7 @@ function Sidebar({ onFilter }) {
       >
         <button
           onClick={toggleMenu}
-          className="text-white focus:outline-none h-full w-full flex items-center justify-center"
+          className="cursor-pointer text-gray-300 hover:text-white focus:outline-none h-full w-full flex items-center justify-center"
         >
           <svg
             className="h-6 w-6 transition-transform duration-300"
@@ -106,7 +106,7 @@ function Sidebar({ onFilter }) {
         <div className="flex justify-end pt-2 pr-2">
           <button
             onClick={toggleMenu}
-            className="text-white focus:outline-none pr-2 pt-2"
+            className="cursor-pointer text-gray-300 hover:text-white focus:outline-none pr-2 pt-2"
           >
             <svg
               className="h-6 w-6"
@@ -118,7 +118,7 @@ function Sidebar({ onFilter }) {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth="1.5"
+                strokeWidth="2"
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
@@ -146,21 +146,30 @@ function Sidebar({ onFilter }) {
               />
               <div className="flex flex-row gap-2">
                 <button
-                  onClick={applyFilter}
-                  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                  onClick={addNum}
+                  className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
                 >
                   Add
                 </button>
 
                 <button
                   onClick={handleReset}
-                  className="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800"
+                  className="cursor-pointer bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800"
                 >
                   Reset
                 </button>
               </div>
             </div>
-            <Card></Card>
+            <div className="flex flex-row gap-2 flex-wrap mb-2">
+              {nums.map((num) => (
+                <Card
+                  key={num}
+                  interstate_num={num}
+                  removeNum={removeNum}
+                ></Card>
+              ))}
+            </div>
+
             <label className="inline-flex items-center cursor-pointer gap-3">
               <input
                 type="checkbox"
