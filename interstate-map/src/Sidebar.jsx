@@ -1,5 +1,6 @@
 import { useState } from "react";
 import React from "react";
+import Dropdown from "./Dropdown";
 
 function Sidebar({ onFilter }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -56,7 +57,7 @@ function Sidebar({ onFilter }) {
   return (
     <>
       <div
-        className={`absolute top-2 left-0 h-10 w-10 z-30 bg-gray-600/80 rounded transform transition-transform duration-300 ease-in-out
+        className={`absolute top-2 left-0 h-10 w-10 z-30 bg-gray-600/90 rounded-tr rounded-br transform transition-transform duration-300 ease-in-out
                     ${
                       menuOpen ? "-translate-x-full" : "translate-x-0 delay-300"
                     }`}
@@ -82,16 +83,16 @@ function Sidebar({ onFilter }) {
         </button>
       </div>
       <div
-        className={`fixed top-0 left-0 h-full lg:w-1/4 md:w-1/3 sm:w-1/2 w-3/4 z-30 bg-gray-600/80 
-                    transform transition-transform duration-300 ease-in-out
+        className={`fixed top-0 left-0 h-full lg:w-1/4 md:w-1/3 sm:w-1/2 w-3/4 z-30 bg-gray-600/90 
+                    transform transition-transform duration-300 ease-in-out flex flex-col  overflow-y-auto flex-grow
                     ${
                       menuOpen ? "translate-x-0 delay-300" : "-translate-x-full"
                     }`}
       >
-        <div className="flex justify-end p-2">
+        <div className="flex justify-end pt-2 pr-2">
           <button
             onClick={toggleMenu}
-            className="text-white focus:outline-none p-2"
+            className="text-white focus:outline-none pr-2 pt-2"
           >
             <svg
               className="h-6 w-6"
@@ -110,7 +111,7 @@ function Sidebar({ onFilter }) {
           </button>
         </div>
 
-        <div className="p-4">
+        <div className="px-4 pb-4">
           <h2 className="text-white md:text-xl text-base font-bold mb-4">
             Interactive US Interstates Map
           </h2>
@@ -145,7 +146,7 @@ function Sidebar({ onFilter }) {
                 </button>
               </div>
             </div>
-            <label className="inline-flex items-center cursor-pointer">
+            <label className="inline-flex items-center cursor-pointer gap-3">
               <input
                 type="checkbox"
                 value=""
@@ -153,12 +154,12 @@ function Sidebar({ onFilter }) {
                 checked={major}
                 onChange={handleMajorToggle}
               />
-              <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
-              <span className="ms-3 pl-2 sm:text-sm text-xs font-medium text-gray-300 dark:text-gray-300">
-                View Only Major Primary Interstates
+              <div className="relative w-11 h-6 flex-shrink-0 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+              <span className="sm:text-sm text-xs font-medium text-gray-300">
+                View Only Major Artery Interstates
               </span>
             </label>
-            <label className="inline-flex items-center cursor-pointer">
+            <label className="inline-flex items-center cursor-pointer gap-3">
               <input
                 type="checkbox"
                 value=""
@@ -166,12 +167,12 @@ function Sidebar({ onFilter }) {
                 checked={even}
                 onChange={handleEvenToggle}
               />
-              <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
-              <span className="ms-3 pl-2 sm:text-sm text-xs font-medium text-gray-300 dark:text-gray-300">
+              <div className="relative w-11 h-6 flex-shrink-0 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+              <span className="sm:text-sm text-xs font-medium text-gray-300 dark:text-gray-300">
                 View Even-Numbered Interstates
               </span>
             </label>
-            <label className="inline-flex items-center cursor-pointer">
+            <label className="inline-flex items-center cursor-pointer gap-3">
               <input
                 type="checkbox"
                 value=""
@@ -179,11 +180,16 @@ function Sidebar({ onFilter }) {
                 checked={odd}
                 onChange={handleOddToggle}
               />
-              <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
-              <span className="ms-3 pl-2 sm:text-sm text-xs font-medium text-gray-300 dark:text-gray-300">
+              <div className="relative w-11 h-6 flex-shrink-0 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+              <span className="sm:text-sm text-xs font-medium text-gray-300 dark:text-gray-300">
                 View Odd-Numbered Interstates
               </span>
             </label>
+            <div className="flex flex-col flex-grow mt-4">
+              <Dropdown dropdown_num={1} />
+              <Dropdown dropdown_num={2} />
+              <Dropdown dropdown_num={3} />
+            </div>
           </div>
         </div>
       </div>
