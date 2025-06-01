@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -8,19 +8,6 @@ mapboxgl.accessToken =
 function Map({ filteredData, isLoading }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  // Get minZoom based on screen size
-  const getMinZoom = () => {
-    return windowWidth < 768 ? 2.5 : 3.8;
-  };
-
-  // Track window resize
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   // Initialize map
   useEffect(() => {
@@ -31,7 +18,7 @@ function Map({ filteredData, isLoading }) {
       style: "mapbox://styles/mapbox/streets-v11",
       center: [-97, 38],
       zoom: 4,
-      minZoom: getMinZoom(),
+      minZoom: 3.8,
     });
 
     // disable map rotation using right click + drag
@@ -43,7 +30,7 @@ function Map({ filteredData, isLoading }) {
     mapRef.current = map;
 
     return () => map.remove();
-  }, [windowWidth]);
+  }, []);
 
   // Add or update GeoJSON source/layer when data changes
   useEffect(() => {
