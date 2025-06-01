@@ -18,7 +18,7 @@ function Map({ filteredData, isLoading }) {
       style: "mapbox://styles/mapbox/streets-v11",
       center: [-97, 38],
       zoom: 4,
-      minZoom: 3.8,
+      minZoom: window.innerWidth < 768 ? 2.8 : 3.8,
     });
 
     // disable map rotation using right click + drag
@@ -29,7 +29,19 @@ function Map({ filteredData, isLoading }) {
 
     mapRef.current = map;
 
-    return () => map.remove();
+    // Add resize handler
+    const handleResize = () => {
+      if (mapRef.current) {
+        mapRef.current.resize();
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      map.remove();
+    };
   }, []);
 
   // Add or update GeoJSON source/layer when data changes
